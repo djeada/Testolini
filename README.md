@@ -18,24 +18,24 @@ The project is structured in the following way:
 
 <h1>Overview of functions</h1>
 
-    * <code>assert_equal</code> - Asserts that two values are equal.
-    * <code>assert_not_equal</code> - Asserts that two values are not equal.
-    * <code>assert_true</code> - Asserts that a value is true.
-    * <code>assert_false</code> - Asserts that a value is false.
-    * <code>assert_variable_set</code> - Asserts that a variable is set.
-    * <code>assert_variable_not_set</code> - Asserts that a variable is not set.
-    * <code>assert_greater_than</code> - Asserts that a value is greater than a given value.
-    * <code>assert_greater_than_equal</code> - Asserts that a value is greater than or equal to a given value.
-    * <code>assert_less_than</code> - Asserts that a value is less than a given value.
-    * <code>assert_less_than_equal</code> - Asserts that a value is less than or equal to a given value.
-    * <code>assert_string_contains</code> - Asserts that a string contains a given string.
-    * <code>assert_string_does_not_contain</code> - Asserts that a string does not contain a given string.
-    * <code>assert_array_equal</code> - Asserts that two arrays are equal.
-    * <code>assert_array_not_equal</code> - Asserts that two arrays are not equal.
-    * <code>assert_array_contains</code> - Asserts that an array contains a given value.
-    * <code>assert_array_does_not_contain</code> - Asserts that an array does not contain a given value.
-    * <code>assert_array_identical</code> - Asserts that two arrays are identical.
-    * <code>assert_array_not_identical</code> - Asserts that two arrays are not identical.
+ * <code>assert_equal</code> - Asserts that two values are equal.
+ * <code>assert_not_equal</code> - Asserts that two values are not equal.
+ * <code>assert_true</code> - Asserts that a value is true.
+ * <code>assert_false</code> - Asserts that a value is false.
+ * <code>assert_variable_set</code> - Asserts that a variable is set.
+ * <code>assert_variable_not_set</code> - Asserts that a variable is not set.
+ * <code>assert_greater_than</code> - Asserts that a value is greater than a given value.
+ * <code>assert_greater_than_equal</code> - Asserts that a value is greater than or equal to a given value.
+ * <code>assert_less_than</code> - Asserts that a value is less than a given value.
+ * <code>assert_less_than_equal</code> - Asserts that a value is less than or equal to a given value.
+ * <code>assert_string_contains</code> - Asserts that a string contains a given string.
+ * <code>assert_string_does_not_contain</code> - Asserts that a string does not contain a given string.
+ * <code>assert_array_equal</code> - Asserts that two arrays are equal.
+ * <code>assert_array_not_equal</code> - Asserts that two arrays are not equal.
+ * <code>assert_array_contains</code> - Asserts that an array contains a given value.
+ * <code>assert_array_does_not_contain</code> - Asserts that an array does not contain a given value.
+ * <code>assert_array_identical</code> - Asserts that two arrays are identical.
+ * <code>assert_array_not_identical</code> - Asserts that two arrays are not identical.
 
 <h1>Contributing</h1>
 The framework is open source and can be found on [Github](https://github.com/djeada/Testolini). Feel free to fork and submit pull requests.
