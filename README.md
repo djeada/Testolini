@@ -2,6 +2,9 @@
 A testing framework built purely in Bash. Its purpose is to make creating small unit tests for your Bash scripts as simple as possible.
 The framework consists of a single script, which can be sourced from your Bash scripts. 
 
+![Testolini](https://github.com/djeada/Testolini/blob/main/resources/Capture.PNG)
+
+
 <h1>Requirements</h1>
 The framework requires Bash 4.0 or higher.
 
