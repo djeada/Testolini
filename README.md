@@ -38,7 +38,7 @@ The project is structured in the following way:
  * <code>assert_array_not_identical</code> - Asserts that two arrays are not identical.
 
 <h1>Contributing</h1>
-The framework is open source and can be found on [Github](https://github.com/djeada/Testolini). Feel free to fork and submit pull requests.
+The framework is open source and can be found on <a href="https://github.com/djeada/Testolini">Github</a>. Feel free to fork and submit pull requests.
 
 <h1>License</h1>
-The framework is licensed under the [MIT license](https://github.com/djeada/Testolini/blob/master/LICENSE). 
+The framework is licensed under the <a href="https://github.com/djeada/Testolini/blob/master/LICENSE">MIT license</a>. 
