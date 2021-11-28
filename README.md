@@ -8,7 +8,9 @@ The framework is composed of a single script that contains a set of assertion fu
 The framework requires Bash 4.0 or higher.
 
 <h1>Installation</h1>
-Copy the src/testolini.sh script. You may put it directly in your project's directory or in your HOME directory. You may also want to modify the PATH variable to include the directory containing the script. Then it will be available in your Bash prompt.
+
+* Copy the <code>src/testolini.sh</code> script. You may put it directly in your project's directory or in your HOME directory. 
+* Additinoaly you may want to modify the PATH variable to include the directory containing the <code>testolini.sh</code> script. Then it will be available in your Bash prompt.
  
 <h1>Usage</h1>
 Source the testolini.sh script in your Bash script.
@@ -19,9 +21,9 @@ Refer to <a href="https://github.com/djeada/Testolini/tree/main/examples">exampl
 <h1>Project structure</h1>
 The project is structured in the following way:
 
-* src/testolini.sh: The library itself.
-* src/test: The directory containing the unit tests for the library.
-* examples: The directory containing example scripts which use the library.
+* <i>src/testolini.sh</i>: The library itself.
+* <i>src/test</i>: The directory containing the unit tests for the library.
+* <i>examples</i>: The directory containing example scripts which use the library.
 
 <h1>Overview of functions</h1>
 
