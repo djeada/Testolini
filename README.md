@@ -14,7 +14,7 @@ Copy the src/testolini.sh script. You may put it directly in your project's dire
 Source the testolini.sh script in your Bash script.
 You may now use the assertion functions when writing the tests. If the assertion fails, the framework will print the error message and exit the script. IF the assertion succeeds, the script will continue executing and no message will be printed.
 
-Refer to examples directory for examples on how to use different assertion functions.
+Refer to <a href="https://github.com/djeada/Testolini/tree/main/examples">examples directory</a> for examples on how to use different assertion functions.
 
 <h1>Project structure</h1>
 The project is structured in the following way:
