@@ -62,6 +62,59 @@ assert_not_equal () {
     fi
 }
 
+
+assert_greater_than() {
+    # Asserts that $1 is greater than $2.
+    local lineno=$3
+
+    if [[ "$1" -le "$2" ]]; then
+        echo "assert_greater_than() failed: "
+        echo "Expected: $1 > $2"
+        echo "Actual: $1 <= $2"
+        echo "File \"$0\", line $lineno"
+        exit $E_ASSERT_FAILED
+    fi
+}
+
+assert_greater_than_or_equal() {
+    # Asserts that $1 is greater than or equal to $2.
+    local lineno=$3
+
+    if [[ "$1" -lt "$2" ]]; then
+        echo "assert_greater_than_or_equal() failed: "
+        echo "Expected: $1 >= $2"
+        echo "Actual: $1 < $2"
+        echo "File \"$0\", line $lineno"
+        exit $E_ASSERT_FAILED
+    fi
+}
+
+assert_less_than() {
+    # Asserts that $1 is less than $2.
+    local lineno=$3
+
+    if [[ "$1" -ge "$2" ]]; then
+        echo "assert_less_than() failed: "
+        echo "Expected: $1 < $2"
+        echo "Actual: $1 >= $2"
+        echo "File \"$0\", line $lineno"
+        exit $E_ASSERT_FAILED
+    fi
+}
+
+assert_less_than_or_equal() {
+    # Asserts that $1 is less than or equal to $2.
+    local lineno=$3
+
+    if [[ "$1" -gt "$2" ]]; then
+        echo "assert_less_than_or_equal() failed: "
+        echo "Expected: $1 <= $2"
+        echo "Actual: $1 > $2"
+        echo "File \"$0\", line $lineno"
+        exit $E_ASSERT_FAILED
+    fi
+}
+
 assert_true() {
     # Asserts that $1 is equal to string "true".
 
