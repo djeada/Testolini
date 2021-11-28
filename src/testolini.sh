@@ -34,39 +34,17 @@ check_alphanumeric() {
     echo 0
 }
 
-assert() {
-    # Asserts that condition passed in $1 is true.
-
-    if [ -z "$2" ]; then
-        return $E_PARAM_ERR
-    fi
-
-    local lineno=$2
-
-    if [ ! $1 ]; then
-        echo "Assertion failed:  \"$1\""
-        echo "File \"$0\", line $lineno"
-        exit $E_ASSERT_FAILED
-    fi
-}
-
 assert_equal () {
     # Asserts that $1 and $2 are equal.
 
     local lineno=$3
 
-    if [ $(check_integer "$1") -eq 1 ] && [ $(check_integer "$2") -eq 1 ]; then
-        if [ "$1" -ne "$2" ]; then
-            echo "Assertion failed:  \"$1\""
-            echo "File \"$0\", line $lineno"
-            exit $E_ASSERT_FAILED
-        fi
-    else
-        if [[ "$1" != "$2" ]]; then
-            echo "Assertion failed:  \"$1\""
-            echo "File \"$0\", line $lineno"
-            exit $E_ASSERT_FAILED
-        fi
+    if [[ "$1" != "$2" ]]; then
+        echo "assert_equal() failed: "
+        echo "Expected: $1"
+        echo "Actual: $2"
+        echo "File \"$0\", line $lineno"
+        exit $E_ASSERT_FAILED
     fi
 }
 
@@ -75,64 +53,62 @@ assert_not_equal () {
 
     local lineno=$3
 
-    if [ $(check_integer "$1") -eq 1 ] && [ $(check_integer "$2") -eq 1 ]; then
-        if [ "$1" -eq "$2" ]; then
-            echo "Assertion failed:  \"$1\""
-            echo "File \"$0\", line $lineno"
-            exit $E_ASSERT_FAILED
-        fi
-    else
-        if [[ "$1" == "$2" ]]; then
-            echo "Assertion failed:  \"$1\""
-            echo "File \"$0\", line $lineno"
-            exit $E_ASSERT_FAILED
-        fi
+    if [[ "$1" == "$2" ]]; then
+        echo "assert_not_equal() failed: "
+        echo "Expected: $1 != $2"
+        echo "Actual: $1 == $2"
+        echo "File \"$0\", line $lineno"
+        exit $E_ASSERT_FAILED
     fi
 }
 
-assert_true () {
+assert_true() {
     # Asserts that $1 is equal to string "true".
 
     local lineno=$2
 
-    if [ "$1" != true ]; then
-        echo "Assertion failed:  \"$1\""
+    if [[ "$1" != true ]]; then
+        echo "assert_true() failed:"
+        echo "Expected: true"
+        echo "Actual: $1"
         echo "File \"$0\", line $lineno"
         exit $E_ASSERT_FAILED
     fi
 }
 
-assert_false () {
+assert_false() {
     # Asserts that $1 is equal to string "false".
 
     local lineno=$2
 
-    if [ "$1" != false ]; then
-        echo "Assertion failed:  \"$1\""
+    if [[ "$1" != false ]]; then
+        echo "assert_false() failed:"
+        echo "Expected: false"
+        echo "Actual: $1"
         echo "File \"$0\", line $lineno"
         exit $E_ASSERT_FAILED
     fi
 }
 
-assert_variable_set () {
+assert_variable_set() {
     # Asserts that $1 is set.
 
     local lineno=$2
 
     if [ -z "$1" ]; then
-        echo "Assertion failed:  \"$1\""
+        echo "assert_variable_set() failed:"
         echo "File \"$0\", line $lineno"
         exit $E_ASSERT_FAILED
     fi
 }
 
-assert_variable_not_set () {
+assert_variable_not_set() {
     # Asserts that $1 is not set.
 
     local lineno=$2
 
     if [ ! -z "$1" ]; then
-        echo "Assertion failed:  \"$1\""
+        echo "assert_variable_not_set() failed:"
         echo "File \"$0\", line $lineno"
         exit $E_ASSERT_FAILED
     fi
@@ -144,7 +120,8 @@ assert_string_contains() {
     local lineno=$3
 
     if [[ "$1" != *"$2"* ]]; then
-        echo "Assertion failed:  \"$1\""
+        echo "assert_string_contains() failed:  "
+        echo "String: \"$1\"\n does not contain substring: \"$2\""
         echo "File \"$0\", line $lineno"
         exit $E_ASSERT_FAILED
     fi
@@ -156,7 +133,8 @@ assert_string_does_not_contain() {
     local lineno=$3
 
     if [[ "$1" == *"$2"* ]]; then
-        echo "Assertion failed:  \"$1\""
+        echo "assert_string_does_not_contain() failed:  "
+        echo "String: \"$1\"\n contains substring: \"$2\""
         echo "File \"$0\", line $lineno"
         exit $E_ASSERT_FAILED
     fi
@@ -165,34 +143,45 @@ assert_string_does_not_contain() {
 assert_array_equal() {
     # Asserts that array $1 is equal to array $2.
     # All elements must be equal. Order matters.
-
-    local -n array_a=$1
-    local -n array_b=$2
+    local -n _array_a_ref=$1
+    local -n _array_b_ref=$2
     local lineno=$3
 
     #check length equal
-    n=$(( ${#array_a[@]}))
-    m=$(( ${#array_b[@]}))
-    assert_equal $n $m $lineno
+    n=$(( ${#_array_a_ref[@]}))
+    m=$(( ${#_array_b_ref[@]}))
+    if [ $n -ne $m ]; then
+        echo "assert_array_equal() failed: "
+        echo "The arrays are not of equal length."
+        echo "Expected length: $n"
+        echo "Actual length: $m"
+        echo "File \"$0\", line $lineno"
+        exit $E_ASSERT_FAILED
+    fi
 
     #check element for element
     for (( i=0; i<n; i++ ))
     do
-        assert_equal "${array_a[$i]}" "${array_b[$i]}" $lineno
+        if [ "${_array_a_ref[$i]}" != "${_array_b_ref[$i]}" ]; then
+            echo "assert_array_equal() failed:"
+            echo "Expected: ${_array_a_ref[@]}"
+            echo "Actual: ${_array_b_ref[@]}"
+            echo "File \"$0\", line $lineno"
+            exit $E_ASSERT_FAILED
+        fi
     done
-
 }
 
 assert_array_not_equal() {
     # Asserts that array $1 is not equal to array $2.
     # A single element must be different. Order matters.
-    local -n array_a=$1
-    local -n array_b=$2
+    local -n _array_a_ref=$1
+    local -n _array_b_ref=$2
     local lineno=$3
 
     #check length equal
-    n=$(( ${#array_a[@]}))
-    m=$(( ${#array_b[@]}))
+    n=$(( ${#_array_a_ref[@]}))
+    m=$(( ${#_array_b_ref[@]}))
 
     if [ $n -ne $m ]; then
         return
@@ -201,12 +190,14 @@ assert_array_not_equal() {
     #check element for element
     for (( i=0; i<n; i++ ))
     do
-        if [[ "${array_a[$i]}" != "${array_b[$i]}" ]]; then
+        if [[ "${_array_a_ref[$i]}" != "${_array_b_ref[$i]}" ]]; then
             return
         fi
     done
 
-    echo "Assertion failed:  \"$1\""
+    echo "assert_array_not_equal() failed: "
+    echo "The arrays are equal."
+    echo "Array: ${_array_a_ref[@]}"
     echo "File \"$0\", line $lineno"
     exit $E_ASSERT_FAILED
 }
@@ -214,62 +205,84 @@ assert_array_not_equal() {
 
 assert_array_contains() {
     # Asserts that array $1 contains element $2.
-    local -n array=$1
+    local -n _array_ref=$1
     local element="$2"
     local lineno=$3
 
     for (( i=0; i<${#array[@]}; i++ ))
     do
-        if [ "${array[$i]}" = "$element" ]; then
+        if [[ "${array[$i]}" == "$element" ]]; then
             return
         fi
     done
 
-    echo "Assertion failed:  \"$element\""
+    echo "assert_array_contains() failed: "
+    echo "Array does not contain the element!"
+    echo "Array: ${array[*]}"
+    echo "The element: $element"
     echo "File \"$0\", line $lineno"
     exit $E_ASSERT_FAILED
 }
 
 assert_array_does_not_contain() {
     # Asserts that array $1 does not contain element $2.
-    local -n array_a=$1
+    local -n _array_ref=$1
     local element="$2"
     local lineno=$3
 
-    for (( i=0; i<${#array_a[@]}; i++ ))
+    for (( i=0; i<${#array[@]}; i++ ))
     do
-        if [ "${array_a[$i]}" = "$element" ]; then
-            echo "Assertion failed:  \"$element\""
-            echo "File \"$0\", line $lineno"
-            exit $E_ASSERT_FAILED
+        if [[ "${array[$i]}" == "$element" ]]; then
+                echo "assert_array_does_not_contain() failed: "
+                echo "Array contains the element!"
+                echo "Array: ${array[*]}"
+                echo "The element: $element"
+                echo "File \"$0\", line $lineno"
+                exit $E_ASSERT_FAILED
         fi
     done
-
-    return
 }
 
 assert_identical_elements() {
     # Asserts that array $1 contains the same elements as array $2.
     # Order of elements does not matter.
-    local -n array_a=$1
-    local -n array_b=$2
+    local -n _array_a_ref=$1
+    local -n _array_b_ref=$2
     local lineno=$3
 
-    IFS=$'\n' array_a=($(sort <<<"${array_a[*]}")); unset IFS
-    IFS=$'\n' array_b=($(sort <<<"${array_b[*]}")); unset IFS
+    IFS=$'\n' 
+    _array_a_ref_sorted=($(sort <<<"${_array_a_ref[*]}")) 
+    _array_b_ref_sorted=($(sort <<<"${_array_b_ref[*]}"))
+    unset IFS
 
-    assertArrayEqual array_a array_b $lineno
+    if [[ "${_array_a_ref_sorted[*]}" != "${_array_b_ref_sorted[*]}" ]]; then
+        echo "assert_identical_elements() failed: "
+        echo "The arrays are not identical."
+        echo "Expected: ${_array_a_ref[*]}"
+        echo "Actual: ${_array_b_ref[*]}"
+        echo "File \"$0\", line $lineno"
+        exit $E_ASSERT_FAILED
+    fi
 }
 
 assert_elements_not_identical() {
     # Asserts that array $1 does not contain the same elements as array $2.
     # Order of elements does not matter.
-    local -n array_a=$1
-    local -n array_b=$2
+    local -n _array_a_ref=$1
+    local -n _array_b_ref=$2
     local lineno=$3
 
-    IFS=$'\n' array_a=($(sort <<<"${array_a[*]}")); unset IFS
-    IFS=$'\n' array_b=($(sort <<<"${array_b[*]}")); unset IFS
+    IFS=$'\n' 
+    _array_a_ref_sorted=($(sort <<<"${_array_a_ref[*]}")) 
+    _array_b_ref_sorted=($(sort <<<"${_array_b_ref[*]}"))
+    unset IFS
 
-    assert_not_equal array_a array_b $lineno
+    if [[ "${_array_a_ref_sorted[*]}" == "${_array_b_ref_sorted[*]}" ]]; then
+        echo "assert_elements_not_identical() failed: "
+        echo "The arrays are identical."
+        echo "Expected: ${_array_a_ref[*]}"
+        echo "Actual: ${_array_b_ref[*]}"
+        echo "File \"$0\", line $lineno"
+        exit $E_ASSERT_FAILED
+    fi
 }
