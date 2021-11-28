@@ -1,16 +1,20 @@
 # Testolini
 A testing framework built purely in Bash. Its purpose is to make creating small unit tests for your Bash scripts as simple as possible.
-The framework consists of a single script, which can be sourced from your Bash scripts. 
+The framework is composed of a single script that contains a set of assertion functions. The framework may be sourced in any Bash script. 
 
 ![Testolini](https://github.com/djeada/Testolini/blob/main/resources/Capture.PNG)
-
 
 <h1>Requirements</h1>
 The framework requires Bash 4.0 or higher.
 
+<h1>Installation</h1>
+Copy the src/testolini.sh script. You may put it directly in your project's directory or in your HOME directory. You may also want to modify the PATH variable to include the directory containing the script. Then it will be available in your Bash prompt.
+ 
 <h1>Usage</h1>
-Include src/testolin.sh in your script and use the library functions to test your code.
-Refer to examples directory examples of how to use the library.
+Source the testolini.sh script in your Bash script.
+You may now use the assertion functions when writing the tests. If the assertion fails, the framework will print the error message and exit the script. IF the assertion succeeds, the script will continue executing and no message will be printed.
+
+Refer to examples directory for examples on how to use different assertion functions.
 
 <h1>Project structure</h1>
 The project is structured in the following way:
@@ -37,8 +41,8 @@ The project is structured in the following way:
  * <code>assert_array_not_equal</code> - Asserts that two arrays are not equal.
  * <code>assert_array_contains</code> - Asserts that an array contains a given value.
  * <code>assert_array_does_not_contain</code> - Asserts that an array does not contain a given value.
- * <code>assert_array_identical</code> - Asserts that two arrays are identical.
- * <code>assert_array_not_identical</code> - Asserts that two arrays are not identical.
+ * <code>assert_identical_elements</code> - Asserts that two arrays consist of the same elements without regard to order.
+ * <code>assert_elements_not_identical</code> - Asserts that two arrays do not consist of the same elements without regard to order.
 
 <h1>Contributing</h1>
 The framework is open source and can be found on <a href="https://github.com/djeada/Testolini">Github</a>. Feel free to fork and submit pull requests.
