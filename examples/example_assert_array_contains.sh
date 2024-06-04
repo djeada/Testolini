@@ -15,3 +15,5 @@ assert_array_contains example_array 5 $LINENO
 
 # This assertion should pass as the element 6 is not present in the example_array.
 assert_array_does_not_contain example_array 6 $LINENO
+
+echo "All tests completed successfully."
