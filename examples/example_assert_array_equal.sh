@@ -17,3 +17,5 @@ assert_array_equal array_a array_b $LINENO
 
 # This assertion should pass as array_a and array_c are not identical.
 assert_array_not_equal array_a array_c $LINENO
+
+echo "All tests completed successfully."
