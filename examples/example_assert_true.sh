@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
+# Ensure the test framework is sourced correctly. Adjust the path as needed.
 source ../src/testolini.sh
-
 
 is_prime() {
     # Function that checks if a number is prime.
@@ -20,12 +20,10 @@ is_prime() {
     i=3
 
     while [[ $((i * i)) -le $num ]]; do
-
         if [[ $(($num % i)) -eq 0 ]]; then
             echo false
             return
         fi
-
         i=$((i + 2))
     done
 
@@ -36,3 +34,5 @@ is_prime() {
 # Both assertions should pass.
 assert_true $(is_prime 19) $LINENO
 assert_false $(is_prime 25) $LINENO
+
+echo "All tests completed successfully."
