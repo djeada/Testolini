@@ -1,53 +1,94 @@
 # Testolini
-A testing framework built purely in Bash. Its purpose is to make creating small unit tests for your Bash scripts as simple as possible.
-The framework is composed of a single script that contains a set of assertion functions. The framework may be sourced in any Bash script. 
+This repository contains a robust and versatile testing framework built entirely in Bash. Designed for simplicity and ease of use, this framework allows developers to write and execute test cases for their Bash scripts and other command-line utilities without the need for external dependencies.
 
 ![Testolini](https://github.com/djeada/Testolini/blob/main/resources/Capture.PNG)
 
-<h1>Requirements</h1>
-The framework requires Bash 4.0 or higher.
+## Features
 
-<h1>Installation</h1>
+- **Pure Bash Implementation:** Entirely written in Bash, making it highly portable and compatible with any Unix-like operating system.
+- **Simple Test Syntax:** Easy-to-understand syntax for writing test cases, enabling quick adoption and minimal learning curve.
+- **Assertions Library:** Comprehensive set of assertion functions to validate various conditions and outputs.
+- **Test Suites:** Support for organizing tests into suites, facilitating structured and maintainable test cases.
+- **Detailed Reporting:** Clear and concise test result reporting, including summaries of passed, failed, and skipped tests.
+- **Extensible:** Flexible framework allowing for custom extensions and additional helper functions.
+- **CI/CD Integration:** Easily integrable with continuous integration and continuous deployment pipelines to automate testing processes.
+- **Lightweight:** Minimal overhead with no need for external dependencies or libraries.
 
-* Copy the <code>src/testolini.sh</code> script. You may put it directly in your project's directory or in your HOME directory. 
-* Additinoaly you may want to modify the PATH variable to include the directory containing the <code>testolini.sh</code> script. Then it will be available in your Bash prompt.
- 
-<h1>Usage</h1>
-Source the testolini.sh script in your Bash script.
-You may now use the assertion functions when writing the tests. If the assertion fails, the framework will print the error message and exit the script. IF the assertion succeeds, the script will continue executing and no message will be printed.
+## Prerequisites
 
-Refer to <a href="https://github.com/djeada/Testolini/tree/main/examples">examples directory</a> for examples on how to use different assertion functions.
+- **Bash Shell:** Ensure you have Bash installed on your system. The framework is compatible with Bash version 4.0 and above.
 
-<h1>Project structure</h1>
-The project is structured in the following way:
+## Usage
 
-* <i>src/testolini.sh</i>: The library itself.
-* <i>src/test</i>: The directory containing the unit tests for the library.
-* <i>examples</i>: The directory containing example scripts which use the library.
+Follow these steps to use the framework:
 
-<h1>Overview of functions</h1>
+1. **Clone the Repository:**
+   ```sh
+   git clone https://github.com/yourusername/bash-testing-framework.git
+   cd bash-testing-framework
+   ```
+   
+2. **Include the Framework in Your Test Script**:
+   Create a new test script and source the testing framework.
+   
+   ```sh
+   #!/bin/bash
+   source ./path/to/bash-testing-framework.sh
+   ```
 
- * <code>assert_equal</code> - Asserts that two values are equal.
- * <code>assert_not_equal</code> - Asserts that two values are not equal.
- * <code>assert_greater_than</code> - Asserts that a value is greater than a given value.
- * <code>assert_greater_than_equal</code> - Asserts that a value is greater than or equal to a given value.
- * <code>assert_less_than</code> - Asserts that a value is less than a given value.
- * <code>assert_less_than_equal</code> - Asserts that a value is less than or equal to a given value.
- * <code>assert_true</code> - Asserts that a value is true.
- * <code>assert_false</code> - Asserts that a value is false.
- * <code>assert_variable_set</code> - Asserts that a variable is set.
- * <code>assert_variable_not_set</code> - Asserts that a variable is not set.
- * <code>assert_string_contains</code> - Asserts that a string contains a given string.
- * <code>assert_string_does_not_contain</code> - Asserts that a string does not contain a given string.
- * <code>assert_array_equal</code> - Asserts that two arrays are equal.
- * <code>assert_array_not_equal</code> - Asserts that two arrays are not equal.
- * <code>assert_array_contains</code> - Asserts that an array contains a given value.
- * <code>assert_array_does_not_contain</code> - Asserts that an array does not contain a given value.
- * <code>assert_identical_elements</code> - Asserts that two arrays consist of the same elements without regard to order.
- * <code>assert_elements_not_identical</code> - Asserts that two arrays do not consist of the same elements without regard to order.
+3. **Write Test Cases**:
+    Use the provided assertion functions to write your test cases.
 
-<h1>Contributing</h1>
-The framework is open source and can be found on <a href="https://github.com/djeada/Testolini">Github</a>. Feel free to fork and submit pull requests.
+    ```sh
+    test_example() {
+        assert_equal "expected_output" "$(your_command)"
+        assert_true "[[ -f your_file ]]"
+    }
+    
+    run_tests test_example
+    ```
 
-<h1>License</h1>
-The framework is licensed under the <a href="https://github.com/djeada/Testolini/blob/master/LICENSE">MIT license</a>. 
+4. **Execute Your Test Script**:
+   Run your test script to see the results.
+   
+   ```sh
+   ./your_test_script.sh
+   ```
+
+### Overview of Functions
+
+#### Assertions
+
+| Function                     | Description                                                 | Usage                                     |
+|------------------------------|-------------------------------------------------------------|-------------------------------------------|
+| `assert_equal`               | Asserts that two values are equal.                          | `assert_equal expected actual`            |
+| `assert_not_equal`           | Asserts that two values are not equal.                      | `assert_not_equal unexpected actual`      |
+| `assert_greater_than`        | Asserts that a value is greater than a given value.         | `assert_greater_than limit value`         |
+| `assert_greater_than_equal`  | Asserts that a value is greater than or equal to a given value. | `assert_greater_than_equal limit value`   |
+| `assert_less_than`           | Asserts that a value is less than a given value.            | `assert_less_than limit value`            |
+| `assert_less_than_equal`     | Asserts that a value is less than or equal to a given value.| `assert_less_than_equal limit value`      |
+| `assert_true`                | Asserts that a value is true.                               | `assert_true condition`                   |
+| `assert_false`               | Asserts that a value is false.                              | `assert_false condition`                  |
+| `assert_variable_set`        | Asserts that a variable is set.                             | `assert_variable_set variable_name`       |
+| `assert_variable_not_set`    | Asserts that a variable is not set.                         | `assert_variable_not_set variable_name`   |
+| `assert_string_contains`     | Asserts that a string contains a given substring.           | `assert_string_contains substring string` |
+| `assert_string_does_not_contain` | Asserts that a string does not contain a given substring. | `assert_string_does_not_contain substring string` |
+
+#### Array Assertions
+
+| Function                      | Description                                                            | Usage                                        |
+|-------------------------------|------------------------------------------------------------------------|----------------------------------------------|
+| `assert_array_equal`          | Asserts that two arrays are equal.                                     | `assert_array_equal expected_array actual_array` |
+| `assert_array_not_equal`      | Asserts that two arrays are not equal.                                 | `assert_array_not_equal unexpected_array actual_array` |
+| `assert_array_contains`       | Asserts that an array contains a given value.                          | `assert_array_contains value array`          |
+| `assert_array_does_not_contain` | Asserts that an array does not contain a given value.                  | `assert_array_does_not_contain value array`  |
+| `assert_identical_elements`   | Asserts that two arrays consist of the same elements without regard to order. | `assert_identical_elements expected_array actual_array` |
+| `assert_elements_not_identical` | Asserts that two arrays do not consist of the same elements without regard to order. | `assert_elements_not_identical unexpected_array actual_array` |
+
+## Contributing
+
+Contributions are welcome! If you have improvements, additional features, or bug fixes to suggest, feel free to fork the repository, make your changes, and submit a pull request.
+
+## License
+
+This repository is licensed under the MIT License.
