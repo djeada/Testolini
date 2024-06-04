@@ -24,8 +24,8 @@ Follow these steps to use the framework:
 
 1. **Clone the Repository:**
    ```sh
-   git clone https://github.com/yourusername/bash-testing-framework.git
-   cd bash-testing-framework
+   git clone https://github.com/djeada/Testolini.git
+   cd Testolini
    ```
    
 2. **Include the Framework in Your Test Script**:
@@ -33,7 +33,7 @@ Follow these steps to use the framework:
    
    ```sh
    #!/bin/bash
-   source ./path/to/bash-testing-framework.sh
+   source src/testolini.sh
    ```
 
 3. **Write Test Cases**:
